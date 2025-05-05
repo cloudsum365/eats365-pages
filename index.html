@@ -243,64 +243,71 @@
 </style>
 <div id="fixed-contact-form">
 <h3>有興趣了解？<br/>請留下您的資訊</h3>
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSekAQZVN0xr_0lpkDMvT1eS7BdUGa6C_L_7s2ZhPX3Rkf_h1A/formResponse" method="POST" target="_blank">
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSekAQZVN0xr_0lpkDMvT1eS7BdUGa6C_L_7s2ZhPX3Rkf_h1A/formResponse" id="customForm" method="POST" onsubmit="submitForm(); return false;">
 <label>餐廳／品牌名稱</label>
 <input name="entry.1479756099" required="" type="text"/>
 <label>聯絡人姓名</label>
 <input name="entry.427735315" required="" type="text"/>
 <label>職稱</label>
 <select name="entry.1482272585">
-<option>老闆</option>
-<option>店長</option>
-<option>資訊人員</option>
-<option>其他</option>
+<option>老闆</option><option>店長</option><option>資訊人員</option><option>其他</option>
 </select>
 <label>聯絡電話</label>
 <input name="entry.534036744" required="" type="text"/>
 <label>電子郵件或 LINE ID</label>
 <input name="entry.1115283938" required="" type="text"/>
 <label>想了解的模組</label>
-<div style="margin-bottom: 10px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 6px;">
-<label style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0; white-space: nowrap;">
-<span style="flex: 1; text-align: left;">掃碼點餐（BYOD）</span>
-<span style="min-width: 24px; text-align: right;">
-<input name="entry.1207730540" type="checkbox" value="掃碼點餐（BYOD）"/>
-</span>
+<div style="margin-bottom:10px;padding:10px;background-color:#f9f9f9;border:1px solid #ccc;border-radius:6px;">
+<label style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;white-space:nowrap;">
+<span style="flex:1;text-align:left;">掃碼點餐（BYOD）</span>
+<span style="min-width:24px;text-align:right;"><input name="entry.1207730540" type="checkbox" value="掃碼點餐（BYOD）"/></span>
 </label>
-<label style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0; white-space: nowrap;">
-<span style="flex: 1; text-align: left;">廚房顯示系統（KDS）</span>
-<span style="min-width: 24px; text-align: right;">
-<input name="entry.1207730540" type="checkbox" value="廚房顯示系統（KDS）"/>
-</span>
+<label style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;white-space:nowrap;">
+<span style="flex:1;text-align:left;">廚房顯示系統（KDS）</span>
+<span style="min-width:24px;text-align:right;"><input name="entry.1207730540" type="checkbox" value="廚房顯示系統（KDS）"/></span>
 </label>
-<label style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0; white-space: nowrap;">
-<span style="flex: 1; text-align: left;">自助排隊取票機（Queue Kiosk）</span>
-<span style="min-width: 24px; text-align: right;">
-<input name="entry.1207730540" type="checkbox" value="自助排隊取票機（Queue Kiosk）"/>
-</span>
+<label style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;white-space:nowrap;">
+<span style="flex:1;text-align:left;">自助排隊取票機（Queue Kiosk）</span>
+<span style="min-width:24px;text-align:right;"><input name="entry.1207730540" type="checkbox" value="自助排隊取票機（Queue Kiosk）"/></span>
 </label>
-<label style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0; white-space: nowrap;">
-<span style="flex: 1; text-align: left;">其他…（申接會員／ERP／外送、金流…）</span>
-<span style="min-width: 24px; text-align: right;">
-<input name="entry.1207730540" type="checkbox" value="其他…（申接會員／ERP／外送、金流…）"/>
-</span>
+<label style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;white-space:nowrap;">
+<span style="flex:1;text-align:left;">其他…（申接會員／ERP／外送、金流…）</span>
+<span style="min-width:24px;text-align:right;"><input name="entry.1207730540" type="checkbox" value="其他…"/></span>
 </label>
 </div>
 <label>是否營運中</label>
 <select name="entry.1735286609">
-<option>已營業中</option>
-<option>準備／籌備中開店</option>
+<option>已營業中</option><option>準備／籌備中開店</option>
 </select>
 <label>使用中 POS 品牌（如有）</label>
 <input name="entry.237291089" type="text"/>
 <label>預計導入時間</label>
 <select name="entry.692402248">
-<option>立即</option>
-<option>1～3 個月內</option>
-<option>未定，想先了解</option>
+<option>立即</option><option>1～3 個月內</option><option>未定，想先了解</option>
 </select>
 <button type="submit">送出</button>
 </form>
+<p id="response-msg" style="display:none; color:green;">送出成功！感謝您的填寫。</p>
+<script>
+function submitForm() {
+  var form = document.getElementById('customForm');
+  var msg = document.getElementById('response-msg');
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", form.action);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onload = function() {
+    form.style.display = "none";
+    msg.style.display = "block";
+  };
+  let data = [];
+  for (let el of form.elements) {
+    if (el.name && ((el.type !== "checkbox" && el.type !== "radio") || el.checked)) {
+      data.push(encodeURIComponent(el.name) + "=" + encodeURIComponent(el.value));
+    }
+  }
+  xhr.send(data.join("&"));
+}
+</script>
 </div>
 <script>
 window.addEventListener("scroll", function () {
