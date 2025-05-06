@@ -475,5 +475,30 @@ window.addEventListener("scroll", function () {
 <td>依客戶ERP系統處理</td>
 </tr>
 </tbody>
-</table></div></body>
+</table></div><script id="ajax-submit">
+function submitToGAS(event) {
+  event.preventDefault();
+  const form = document.getElementById("eats365-contact-form");
+  const url = "https://script.google.com/macros/s/AKfycbzIk0YfgXbbMpOFRdXtQe4m3Aylhb70MvG9G2NzTys5a38zFy-Om41uRHI-dglZPLR7GQ/exec";
+
+  const data = {
+    name: form.querySelector('[name="name"]').value,
+    email: form.querySelector('[name="email"]').value,
+    phone: form.querySelector('[name="phone"]').value,
+    message: form.querySelector('[name="message"]').value
+  };
+
+  fetch(url, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  }).then(() => {
+    alert("✅ 表單已送出，我們將盡快與您聯絡！");
+    form.reset();
+  }).catch(() => {
+    alert("❌ 表單送出失敗，請稍後再試");
+  });
+}
+</script></body>
 </html>
