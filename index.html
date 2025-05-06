@@ -243,7 +243,7 @@
 </style>
 <div id="fixed-contact-form">
 <h3>有興趣了解？<br/>請留下您的資訊</h3>
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSekAQZVN0xr_0lpkDMvT1eS7BdUGa6C_L_7s2ZhPX3Rkf_h1A/formResponse" id="customForm" method="POST" onsubmit="submitForm(); return false;">
+<form action="" id="customForm" method="POST" onsubmit="submitToGAS(event); return false;">
 <label>餐廳／品牌名稱</label>
 <input name="entry.1479756099" required="" type="text"/>
 <label>聯絡人姓名</label>
@@ -475,24 +475,18 @@ window.addEventListener("scroll", function () {
 <td>依客戶ERP系統處理</td>
 </tr>
 </tbody>
-</table></div><script id="ajax-submit">
+</table></div><script>
 function submitToGAS(event) {
   event.preventDefault();
-  const form = document.getElementById("eats365-contact-form");
+  const form = document.getElementById("customForm");
   const url = "https://script.google.com/macros/s/AKfycbzIk0YfgXbbMpOFRdXtQe4m3Aylhb70MvG9G2NzTys5a38zFy-Om41uRHI-dglZPLR7GQ/exec";
 
-  const data = {
-    name: form.querySelector('[name="name"]').value,
-    email: form.querySelector('[name="email"]').value,
-    phone: form.querySelector('[name="phone"]').value,
-    message: form.querySelector('[name="message"]').value
-  };
+  const formData = new FormData(form);
 
   fetch(url, {
     method: "POST",
     mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
+    body: formData
   }).then(() => {
     alert("✅ 表單已送出，我們將盡快與您聯絡！");
     form.reset();
