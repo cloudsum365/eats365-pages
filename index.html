@@ -243,7 +243,7 @@
 </style>
 <div id="fixed-contact-form">
 <h3>有興趣了解？<br/>請留下您的資訊</h3>
-<form action="" id="customForm" method="POST" onsubmit="submitToGAS(event); return false;">
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSekAQZVN0xr_0lpkDMvT1eS7BdUGa6C_L_7s2ZhPX3Rkf_h1A/formResponse" id="customForm" method="POST" onsubmit="document.getElementById('thankyou-msg').style.display='block'; setTimeout(() =&gt; document.getElementById('customForm').reset(), 500);" target="hidden_iframe">
 <label>餐廳／品牌名稱</label>
 <input name="entry.1479756099" required="" type="text"/>
 <label>聯絡人姓名</label>
@@ -308,7 +308,7 @@ function submitForm() {
   xhr.send(data.join("&"));
 }
 </script>
-</div>
+<iframe name="hidden_iframe" style="display:none;"></iframe><p id="thankyou-msg" style="display:none;color:green;">✅ 表單已送出，感謝您的填寫！</p><script>function formSubmitted() { document.getElementById('thankyou-msg').style.display = 'block'; }</script></div>
 <script>
 window.addEventListener("scroll", function () {
   var form = document.getElementById("fixed-contact-form");
@@ -475,24 +475,5 @@ window.addEventListener("scroll", function () {
 <td>依客戶ERP系統處理</td>
 </tr>
 </tbody>
-</table></div><script>
-function submitToGAS(event) {
-  event.preventDefault();
-  const form = document.getElementById("customForm");
-  const url = "https://script.google.com/macros/s/AKfycbynqmuB59Yzxrf6tMd7WmHBFuEzSyJRa5N--JIPiw-xY9qr1Kz22-qlHnDeXLh9kd60Xg/exec";
-
-  const formData = new FormData(form);
-
-  fetch(url, {
-    method: "POST",
-    mode: "no-cors",
-    body: formData
-  }).then(() => {
-    alert("✅ 表單已送出，我們將盡快與您聯絡！");
-    form.reset();
-  }).catch(() => {
-    alert("❌ 表單送出失敗，請稍後再試");
-  });
-}
-</script></body>
+</table></div></body>
 </html>
